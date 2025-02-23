@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Expiry Notification</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; }
+        .email-container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; }
+        .header { color: #d32f2f; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+        .content { font-size: 16px; line-height: 1.6; }
+        .highlight-box { background-color: #f8d7da; padding: 15px; border-radius: 5px; margin: 20px 0; color: #721c24; }
+        .footer { font-size: 14px; color: #777; text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <!-- Dynamic Header (Same as Email Subject) -->
+    <div class="header" th:text="${subject}">⏳ Medicine Expiry Warning</div>
+
+    <div class="content">
+        <p>Dear Valued Customer,</p>
+        <p>We hope you're doing well.</p>
+
+        <!-- Dynamic Main Message -->
+        <p>
+            <th:block th:switch="${notificationType}">
+                <!-- Expired -->
+                <span th:case="expired">
+                    🚨 This is an urgent reminder that your medicine <strong th:text="${medicineName}"></strong> has <strong>already expired</strong>.
+                </span>
+                <!-- 7 Days -->
+                <span th:case="7days">
+                    ⏳ This is a gentle reminder that your medicine <strong th:text="${medicineName}"></strong> will expire in <strong>7 days</strong>. ⚠
+                </span>
+                <!-- 1 Day -->
+                <span th:case="1day">
+                    ⚠ Urgent: Your medicine <strong th:text="${medicineName}"></strong> will <strong>expire tomorrow</strong>.
+                </span>
+                <!-- Low Stock -->
+                <span th:case="lowStock">
+                    📉 Your medicine <strong th:text="${medicineName}"></strong> is <strong>running low</strong>. Please restock now.
+                </span>
+            </th:block>
+        </p>
+
+        <!-- Show Expiry Date (Except for Low Stock) -->
+        <div class="highlight-box" th:if="${notificationType != 'lowStock'}">
+            <p>📅 Expiry Date: <strong th:text="${expiryDate}"></strong></p>
+        </div>
+
+        <p>To ensure your health and safety, please check your stock and replace it if needed.</p>
+        <p>Stay healthy! If you have any questions, feel free to contact us.</p>
+        <p>Best regards,<br/>MediMate Team 🏥</p>
+    </div>
+
+    <div class="footer">
+        <p>This is an automated message. Please do not reply to this email.</p>
+    </div>
+</div>
+</body>
+</html>
