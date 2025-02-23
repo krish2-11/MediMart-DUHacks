@@ -2,6 +2,7 @@ package com.example.MediMart.service;
 
 import com.example.MediMart.model.Inventory;
 import com.example.MediMart.model.Medicine;
+import com.example.MediMart.model.User;
 import com.example.MediMart.repository.InventoryRepository;
 import com.example.MediMart.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class InventoryService {
     private MedicineRepository medicineRepository;
 
     public void addInventory(Inventory inventory) {
-        // Check if the medicine already exists
+        System.out.println(inventory.getUnitPrice());
         Optional<Medicine> existingMedicine = medicineRepository.findByNameAndDosageAndFormAndBrandName(
                 inventory.getMedicine().getName(),
                 inventory.getMedicine().getDosage(),
@@ -27,14 +28,8 @@ public class InventoryService {
                 inventory.getMedicine().getBrandName()
         );
 
-        Medicine medicine;
-        if (existingMedicine.isPresent()) {
-            medicine = existingMedicine.get();  // Use existing medicine
-        } else {
-            medicine = medicineRepository.save(inventory.getMedicine());  // Save new medicine
-        }
+        Medicine medicine = existingMedicine.orElseGet(() -> medicineRepository.save(inventory.getMedicine()));
 
-        // Check if an identical inventory record exists (excluding quantity)
         Optional<Inventory> existingInventory = inventoryRepository.findByMedicineAndEmailAndManufacturingDateAndExpDateAndReorderLevelAndUnitPrice(
                 medicine,
                 inventory.getEmail(),
@@ -45,12 +40,12 @@ public class InventoryService {
         );
 
         if (existingInventory.isPresent()) {
-            // If identical record exists, update the quantity
             Inventory existing = existingInventory.get();
-            existing.setQuantity(existing.getQuantity() + inventory.getQuantity()); // Add quantity
+            System.out.println(existing.getUnitPrice());
+            existing.setQuantity(existing.getQuantity() + inventory.getQuantity());
             inventoryRepository.save(existing);
         } else {
-            // Otherwise, save as a new entry
+            System.out.println(inventory.getUnitPrice());
             inventory.setMedicine(medicine);
             inventoryRepository.save(inventory);
         }
@@ -79,4 +74,5 @@ public class InventoryService {
 
         return result;
     }
+
 }

@@ -31,6 +31,9 @@ public class Inventory {
 
     private double unitPrice;
 
+    private boolean expiryNotified7Days = false;
+    private boolean expiryNotified1Day = false;
+    private boolean lowStockNotified = false;
     // Getters and Setters
     public Long getId() {
         return id;
@@ -95,4 +98,14 @@ public class Inventory {
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
+
+    public boolean isExpiryNotified7Days() { return expiryNotified7Days; }
+    public void setExpiryNotified7Days(boolean expiryNotified7Days) { this.expiryNotified7Days = expiryNotified7Days; }
+
+    public boolean isExpiryNotified1Day() { return expiryNotified1Day; }
+    public void setExpiryNotified1Day(boolean expiryNotified1Day) { this.expiryNotified1Day = expiryNotified1Day; }
+
+    public boolean isLowStockNotified() { return lowStockNotified; }
+    public void setLowStockNotified(boolean lowStockNotified) { this.lowStockNotified = lowStockNotified; }
+
 }

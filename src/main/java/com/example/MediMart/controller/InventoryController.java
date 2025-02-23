@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/inventory")
+@CrossOrigin
 public class InventoryController {
 
     @Autowired
@@ -74,6 +75,11 @@ public ResponseEntity<String> updateInventoryQuantity(@RequestBody Inventory req
         Inventory inventory = inventoryOptional.get();
         inventory.setQuantity(request.getQuantity());  // Update quantity
         inventoryRepository.save(inventory);
+
+        // Reset lowStockNotified if quantity is above reorder level
+        if (inventory.getQuantity() > inventory.getReorderLevel()) {
+            inventory.setLowStockNotified(false);
+        }
         return ResponseEntity.ok("Quantity updated successfully.");
     } else {
         return ResponseEntity.status(404).body("Inventory item not found.");

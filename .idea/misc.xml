@@ -5,14 +5,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/MediMart-master/MediMart/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
-<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="23" project-jdk-type="JavaSDK">
-=======
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="23" project-jdk-type="JavaSDK">
->>>>>>> ba2c2a2 (Add-remove and delete Medicine record of particular user)
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

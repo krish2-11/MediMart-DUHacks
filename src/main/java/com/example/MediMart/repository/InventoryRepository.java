@@ -22,4 +22,5 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     List<Inventory> findByEmail(String email);
     Optional<Inventory> findByEmailAndMedicineId(String email, Long medicineId);
+
 }
