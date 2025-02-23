@@ -1,4 +1,5 @@
 package com.example.MediMart.controller;
+
 import com.example.MediMart.model.Inventory;
 import com.example.MediMart.model.Medicine;
 import com.example.MediMart.model.MedicineRequest;
@@ -7,20 +8,22 @@ import com.example.MediMart.repository.UserRepository;
 import com.example.MediMart.service.InventoryService;
 import com.example.MediMart.service.MedicineService;
 import com.example.MediMart.service.UserService;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/medicines")

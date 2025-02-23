@@ -2,7 +2,6 @@ package com.example.MediMart.service;
 
 import com.example.MediMart.model.Inventory;
 import com.example.MediMart.model.Medicine;
-import com.example.MediMart.model.User;
 import com.example.MediMart.repository.InventoryRepository;
 import com.example.MediMart.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
